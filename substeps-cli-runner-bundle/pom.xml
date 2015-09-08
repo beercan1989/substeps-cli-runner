@@ -119,6 +119,9 @@
                                 <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip" verbose="true" usetimestamp="true">
                                     <url url="https://selenium-release.storage.googleapis.com/${ie.driver.version}/IEDriverServer_Win32_${ie.driver.version}.0.zip"/>
                                 </get>
+                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip" verbose="true" usetimestamp="true">
+                                    <url url="http://selenium-release.storage.googleapis.com/2.41/IEDriverServer_x64_${ie.driver.version}.0.zip"/>
+                                </get>
                             </target>
                         </configuration>
                     </execution>
@@ -178,8 +181,9 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/assembly/win32.xml</descriptor>
                                 <descriptor>src/assembly/mac32.xml</descriptor>
+                                <descriptor>src/assembly/win32.xml</descriptor>
+                                <descriptor>src/assembly/win64.xml</descriptor>
                                 <descriptor>src/assembly/unix32.xml</descriptor>
                                 <descriptor>src/assembly/unix64.xml</descriptor>
                             </descriptors>
