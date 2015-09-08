@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>substeps-cli-runner-bundle</artifactId>
+    <packaging>pom</packaging>
+    <name>SubSteps CLI Runner Bundle</name>
+
+    <parent>
+        <groupId>co.uk.baconi.substeps</groupId>
+        <artifactId>substeps-cli-runner-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <bundled.version>0.0.1</bundled.version>
+    </properties>
+
+    <dependencies>
+        <!-- Substeps CLI Runner-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>substeps-cli-runner</artifactId>
+        </dependency>
+
+        <!-- Substeps -->
+        <dependency>
+            <groupId>com.technophobia.substeps</groupId>
+            <artifactId>substeps-bom</artifactId>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.technophobia.substeps</groupId>
+            <artifactId>webdriver-substeps</artifactId>
+        </dependency>
+
+        <!-- TODO Include: Logger, Rest Driver Substeps? -->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-libraries-for-bundling</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-substeps-runner-resources</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-exe-launcher</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <outfile>${project.build.outputDirectory}/substeps.exe</outfile>
+                            <jar>lib/substeps-cli-runner-${project.version}.${project.packaging}</jar>
+                            <dontWrapJar>true</dontWrapJar>
+                            <errTitle>${project.name}</errTitle>
+                            <classPath>
+                                <mainClass>co.uk.baconi.substeps.cli.MainRunner</mainClass>
+                                <addDependencies>true</addDependencies>
+                                <jarLocation>lib/</jarLocation>
+                                <preCp>properties/application.conf;</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.6.0</minVersion>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>0.${bundled.version}</fileVersion>
+                                <txtFileVersion>0.${bundled.version}</txtFileVersion>
+                                <fileDescription>${project.description}</fileDescription>
+                                <copyright>2015 James Bacon</copyright>
+                                <productVersion>0.${bundled.version}</productVersion>
+                                <txtProductVersion>0.${bundled.version}</txtProductVersion>
+                                <productName>${project.name}</productName>
+                                <internalName>${project.artifactId}</internalName>
+                                <originalFilename>substeps.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>bundle-substeps-cli-runner</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/windows.xml</descriptor>
+                                <descriptor>src/assembly/unix.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
