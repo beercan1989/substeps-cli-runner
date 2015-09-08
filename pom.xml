@@ -6,8 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SubSteps Runner Parent</name>
-    <description>Contains substeps runner projects</description>
+    <name>SubSteps CLI Runner</name>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -70,6 +69,30 @@
                     <inherit>true</inherit>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+
+                <executions>
+                    <execution>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+
+                        <configuration>
+
+                            <includeArtifactIds>substeps-core</includeArtifactIds>
+                            <includeTypes>test-jar</includeTypes>
+                            <outputDirectory>${project.build.directory}/core-tests</outputDirectory>
+                        </configuration>
+
+                    </execution>
+                </executions>
+
             </plugin>
         </plugins>
     </build>
