@@ -43,14 +43,20 @@
 
     <dependencies>
         <dependency>
-          <groupId>com.technophobia.substeps</groupId>
-          <artifactId>substeps-core-api</artifactId>
-          <version>${substeps.version}</version>
+            <groupId>com.technophobia.substeps</groupId>
+            <artifactId>substeps-bom</artifactId>
+            <version>${substeps.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
           <groupId>com.technophobia.substeps</groupId>
           <artifactId>substeps-junit-runner</artifactId>
           <version>${substeps.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.technophobia.substeps</groupId>
+            <artifactId>webdriver-substeps</artifactId>
+            <version>${substeps.version}</version>
         </dependency>
 
         <!-- TODO Include: Logger, Typesafe Properties, Substeps Runners? -->
@@ -78,18 +84,14 @@
 
                 <executions>
                     <execution>
-                        <phase>test-compile</phase>
+                        <id>prepare-substeps-runner-dependencies-for-bundling</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>unpack-dependencies</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
-
                         <configuration>
-
-                            <includeArtifactIds>substeps-core</includeArtifactIds>
-                            <includeTypes>test-jar</includeTypes>
-                            <outputDirectory>${project.build.directory}/core-tests</outputDirectory>
+                            <outputDirectory>${project.build.directory}/bundle/lib</outputDirectory>
                         </configuration>
-
                     </execution>
                 </executions>
 
