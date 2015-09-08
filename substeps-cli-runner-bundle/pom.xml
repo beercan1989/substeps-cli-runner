@@ -14,6 +14,11 @@
 
     <properties>
         <bundled.version>0.0.1</bundled.version>
+
+        <chrome.driver.version>2.19</chrome.driver.version>
+
+        <!-- Hardcoded to Selenium version included by webdriver-substeps -->
+        <ie.driver.version>2.41</ie.driver.version>
     </properties>
 
     <dependencies>
@@ -78,6 +83,47 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-drivers-for-browsers</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Make sure the drivers directory exists -->
+                                <mkdir dir="${project.build.directory}/drivers"/>
+
+                                <!-- Chrome Driver-->
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_release-notes.txt" verbose="true" usetimestamp="true">
+                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/notes.txt"/>
+                                </get>
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_win32.zip"/>
+                                </get>
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_mac32.zip"/>
+                                </get>
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux32.zip"/>
+                                </get>
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux64.zip"/>
+                                </get>
+
+                                <!-- IE Driver-->
+                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://selenium-release.storage.googleapis.com/${ie.driver.version}/IEDriverServer_Win32_${ie.driver.version}.0.zip"/>
+                                </get>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
@@ -132,8 +178,10 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/assembly/windows.xml</descriptor>
-                                <descriptor>src/assembly/unix.xml</descriptor>
+                                <descriptor>src/assembly/win32.xml</descriptor>
+                                <descriptor>src/assembly/mac32.xml</descriptor>
+                                <descriptor>src/assembly/unix32.xml</descriptor>
+                                <descriptor>src/assembly/unix64.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

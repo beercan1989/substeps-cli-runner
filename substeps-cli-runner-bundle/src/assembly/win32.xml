@@ -1,15 +1,16 @@
 <assembly>
-    <id>windows</id>
+    <id>win32</id>
     <formats>
-        <format>tar.gz</format>
-        <format>tar.bz2</format>
         <format>zip</format>
     </formats>
     <baseDirectory>substeps-cli-runner</baseDirectory>
     <fileSets>
         <fileSet>
+            <directory>${project.basedir}/../</directory>
+            <outputDirectory></outputDirectory>
             <includes>
-                <include>${project.parent.relativePath}/LICENSE*</include>
+                <include>LICENSE</include>
+                <include>README.md</include>
             </includes>
             <lineEnding>dos</lineEnding>
         </fileSet>
@@ -47,6 +48,15 @@
         <fileSet>
             <directory>${project.build.outputDirectory}/lib</directory>
             <outputDirectory>lib</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/drivers</directory>
+            <includes>
+                <include>ChromeDriver_${chrome.driver.version}_win32.zip</include>
+                <include>ChromeDriver_${chrome.driver.version}_release-notes.txt</include>
+                <include>IEDriver_${ie.driver.version}.0_win32.zip</include>
+            </includes>
+            <outputDirectory>drivers</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
