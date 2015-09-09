@@ -24,9 +24,16 @@ package co.uk.baconi.substeps.cli;
  */
 public class MainRunner {
 
-    public static void main(final String[] args){
+    public static void main(final String[] args) {
 
         System.out.println("Hello World");
+
+        final StringBuilder arguments = new StringBuilder("Arguments: ");
+        for (final String arg : args) {
+            arguments.append(arg);
+            arguments.append(", ");
+        }
+        System.out.println(arguments);
 
     }
 
