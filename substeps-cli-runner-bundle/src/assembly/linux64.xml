@@ -18,7 +18,7 @@
   -->
 
 <assembly>
-    <id>unix32</id>
+    <id>linux64</id>
     <formats>
         <format>tar.gz</format>
     </formats>
@@ -62,9 +62,13 @@
             <outputDirectory>lib</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${project.build.directory}/drivers/linux64</directory>
+            <outputDirectory>drivers</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
             <directory>${project.build.directory}/drivers</directory>
             <includes>
-                <include>ChromeDriver_${chrome.driver.version}_linux32.zip</include>
                 <include>ChromeDriver_${chrome.driver.version}_release-notes.txt</include>
             </includes>
             <outputDirectory>drivers</outputDirectory>

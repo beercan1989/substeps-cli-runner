@@ -62,9 +62,13 @@
             <outputDirectory>lib</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${project.build.directory}/drivers/mac32</directory>
+            <outputDirectory>drivers</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
             <directory>${project.build.directory}/drivers</directory>
             <includes>
-                <include>ChromeDriver_${chrome.driver.version}_mac32.zip</include>
                 <include>ChromeDriver_${chrome.driver.version}_release-notes.txt</include>
             </includes>
             <outputDirectory>drivers</outputDirectory>

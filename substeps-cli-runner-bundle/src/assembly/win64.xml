@@ -69,13 +69,16 @@
             <outputDirectory>lib</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${project.build.directory}/drivers/win64</directory>
+            <outputDirectory>drivers</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${project.build.directory}/drivers</directory>
             <includes>
-                <include>ChromeDriver_${chrome.driver.version}_win32.zip</include>
                 <include>ChromeDriver_${chrome.driver.version}_release-notes.txt</include>
-                <include>IEDriver_${ie.driver.version}.0_win64.zip</include>
             </includes>
             <outputDirectory>drivers</outputDirectory>
+            <lineEnding>dos</lineEnding>
         </fileSet>
     </fileSets>
 </assembly>
