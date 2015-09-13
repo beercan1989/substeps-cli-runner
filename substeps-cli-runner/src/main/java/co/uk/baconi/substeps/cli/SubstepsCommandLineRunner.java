@@ -19,22 +19,31 @@
 
 package co.uk.baconi.substeps.cli;
 
-/**
- * Created by Bacon on 08/09/15.
- */
-public class MainRunner {
+import co.uk.baconi.junit.BasicRunListener;
+import org.junit.internal.RealSystem;
+import org.junit.internal.TextListener;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.RunWith;
+
+@RunWith(JunitFeatureRunnerUsingProperties.class)
+public class SubstepsCommandLineRunner {
 
     public static void main(final String[] args) {
 
-        System.out.println("Hello World");
+        // Setup JUnit reporting.
+        final JUnitCore jUnitCore = new JUnitCore();
 
-        final StringBuilder arguments = new StringBuilder("Arguments: ");
-        for (final String arg : args) {
-            arguments.append(arg);
-            arguments.append(", ");
-        }
-        System.out.println(arguments);
+        // TODO - Find an implementation that doesn't break JUnit runs.
+        //jUnitCore.addListener(new XmlRunListener("reports/junit/junit_report.xml")); // TODO - Extract to a property
 
+        // Add my basic run listener.
+        jUnitCore.addListener(new BasicRunListener());
+
+        // Run JUnit.
+        final Result result = jUnitCore.run(SubstepsCommandLineRunner.class);
+
+        // Return non-zero status code if unsuccessful.
+        System.exit(result.wasSuccessful() ? 0 : 1);
     }
-
 }

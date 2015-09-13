@@ -58,8 +58,25 @@
             <artifactId>webdriver-substeps</artifactId>
         </dependency>
 
-        <!-- TODO Include: Logger, Rest Driver Substeps? -->
+        <!-- TODO Include: Rest Driver Substeps? -->
 
+        <!-- Logger -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -164,7 +181,7 @@
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>${project.name}</errTitle>
                             <classPath>
-                                <mainClass>co.uk.baconi.substeps.cli.MainRunner</mainClass>
+                                <mainClass>co.uk.baconi.substeps.cli.SubstepsCommandLineRunner</mainClass>
                                 <addDependencies>true</addDependencies>
                                 <jarLocation>lib/</jarLocation>
                                 <preCp>properties/application.conf;</preCp>

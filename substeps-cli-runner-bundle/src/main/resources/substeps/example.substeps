@@ -1,0 +1,8 @@
+Define: Given I go to the home page
+    NavigateTo /
+
+Define: Then the page title is "<page_title>"
+	AssertPageTitle is "<page_title>"
+
+Define: And if I click the "<link_text>" navigation link
+    ClickLink "<link_text>"

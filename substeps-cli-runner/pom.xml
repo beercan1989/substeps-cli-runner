@@ -47,8 +47,10 @@
             <version>${substeps.version}</version>
         </dependency>
 
-        <!-- TODO Include: SLF4J ? -->
-
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
-
 </project>
