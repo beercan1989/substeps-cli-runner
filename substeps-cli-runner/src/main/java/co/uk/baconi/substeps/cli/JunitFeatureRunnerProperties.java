@@ -29,63 +29,63 @@ public enum JunitFeatureRunnerProperties {
     ; // No Instances
 
     /**
-     * All properties under "co.uk.baconi.substeps"
+     * All properties under "co.uk.baconi.substeps.cli"
      */
-    public static final Config PROPERTIES = ConfigFactory.load().getConfig("co.uk.baconi.substeps");
+    public static final Config PROPERTIES = ConfigFactory.load().getConfig("co.uk.baconi.substeps.cli");
 
     /**
      * Directory containing your features.
      */
-    public static final String FEATURE_DIRECTORY = PROPERTIES.getString("cli.featuresDirectory");
+    public static final String FEATURE_DIRECTORY = PROPERTIES.getString("featuresDirectory");
 
     /**
      * Directory containing your substeps.
      */
-    public static final String SUBSTEPS_DIRECTORY = PROPERTIES.getString("cli.substepsDirectory");
+    public static final String SUBSTEPS_DIRECTORY = PROPERTIES.getString("substepsDirectory");
 
     /**
      * List of the tags required of a feature to run them
      */
-    public static final List<String> TAGS = PROPERTIES.getStringList("cli.tags");
+    public static final List<String> TAGS = PROPERTIES.getStringList("tags");
 
     /**
      * TODO: Determin what this property actually do.
      */
-    public static final boolean STRICT = PROPERTIES.getBoolean("cli.strict");
+    public static final boolean STRICT = PROPERTIES.getBoolean("strict");
 
     /**
      * TODO: Determin what this property actually do.
      */
-    public static final List<String> NON_STRICT_KEYWORD_PRECEDENCE = PROPERTIES.getStringList("cli.nonStrictKeywordPrecedence");
+    public static final List<String> NON_STRICT_KEYWORD_PRECEDENCE = PROPERTIES.getStringList("nonStrictKeywordPrecedence");
 
     /**
      * The Description Provider. - TODO: Determin what that actaully means.
      */
-    public static final String DESCRIPTION_PROVIDER = PROPERTIES.getString("cli.descriptionProvider");
+    public static final String DESCRIPTION_PROVIDER = PROPERTIES.getString("descriptionProvider");
 
     /**
      * List of SubStep Implementations, classes that implement annotations in: {@link com.technophobia.substeps.model.SubSteps}
      */
-    public static final List<String> SETP_IMPLS = PROPERTIES.getStringList("cli.implementations.steps");
+    public static final List<String> SETP_IMPLS = PROPERTIES.getStringList("implementations.steps");
 
     /**
      * List of Before And After Implementations, classes that implement annotations in: {@link com.technophobia.substeps.runner.setupteardown.Annotations}
      */
-    public static final List<String> BEFORE_AND_AFTER = PROPERTIES.getStringList("cli.implementations.beforeAndAfter");
+    public static final List<String> BEFORE_AND_AFTER = PROPERTIES.getStringList("implementations.beforeAndAfter");
 
     /**
      * Enables the running of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final boolean REPORT_ENABLED = PROPERTIES.getBoolean("cli.report.enabled");
+    public static final boolean REPORT_ENABLED = PROPERTIES.getBoolean("report.enabled");
 
     /**
      * Implementation of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final String REPORT_BUILDER = PROPERTIES.getString("cli.report.builder");
+    public static final String REPORT_BUILDER = PROPERTIES.getString("report.builder");
 
     /**
      * Directory to place the output of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final String REPORT_OUTPUT_LOCATION = PROPERTIES.getString("cli.report.outputLocation");
+    public static final String REPORT_OUTPUT_LOCATION = PROPERTIES.getString("report.outputLocation");
 
 }

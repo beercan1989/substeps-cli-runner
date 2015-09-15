@@ -21,9 +21,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>SubSteps CLI Runner Bundle</name>
     <artifactId>substeps-cli-runner-bundle</artifactId>
     <packaging>pom</packaging>
-    <name>SubSteps CLI Runner Bundle</name>
 
     <parent>
         <groupId>co.uk.baconi.substeps</groupId>
@@ -54,8 +54,8 @@
             <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>com.technophobia.substeps</groupId>
-            <artifactId>webdriver-substeps</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>substeps-webdriver-proxy</artifactId>
         </dependency>
 
         <!-- TODO Include: Rest Driver Substeps? -->
