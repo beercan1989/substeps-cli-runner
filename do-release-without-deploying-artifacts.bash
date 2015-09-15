@@ -45,19 +45,12 @@ echo "Current Version: ${CURRENT_SNAP_VERSION}"
 echo "Release Version: ${RELEASE_VERSION}"
 echo "Next Version:    ${NEXT_SNAP_VERSION}"
 
+## Remove SNAPSHOT
+## Compile and Install
+## Commit Change and Tag
+## Increment, add SNAPSHOT and Commit Change
 mvn --batch-mode release:prepare -Dtag="${RELEASE_VERSION}" -DreleaseVersion="${RELEASE_VERSION}" -DdevelopmentVersion="${NEXT_SNAP_VERSION}" -DautoVersionSubmodules=true 
 
-## Remove SNAPSHOT
-#mvn --batch-mode release:update-versions -DautoVersionSubmodules=true -DdevelopmentVersion="${RELEASE_VERSION}"
-
-## Compile and Install
-#mvn clean install
-
-## Commit Change and Tag
-#git add pom substeps-cli-runner-bundle/pom.xml substeps-cli-runner/pom.xml
-#git commit -m ""
-#git tag -m "Tagging release: ${RELEASE_VERSION}" ${RELEASE_VERSION}
-
-## Increment, add SNAPSHOT and Commit Change
-#mvn --batch-mode release:update-versions -DdevelopmentVersion=${NEXT_SNAP_VERSION}
-#git add pom substeps-cli-runner-bundle/pom.xml substeps-cli-runner/pom.xml
+## Clean Up Local Repo
+find -type f -name '*.releaseBackup' | xargs -I {} rm -v {}
+rm -v release.properties

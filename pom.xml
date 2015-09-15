@@ -17,13 +17,12 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.uk.baconi.substeps</groupId>
     <artifactId>substeps-cli-runner-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>SubSteps CLI Runner Parent</name>
@@ -32,7 +31,8 @@
         <url>https://github.com/beercan1989/substeps-cli-runner</url>
         <connection>scm:git:git://github.com/beercan1989/substeps-cli-runner.git</connection>
         <developerConnection>scm:git:git@github.com:beercan1989/substeps-cli-runner.git</developerConnection>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
 
     <licenses>
         <license>
