@@ -24,7 +24,7 @@
     <packaging>pom</packaging>
 
     <name>SubSteps CLI Runner Bundle</name>
-    <description>A bundle of the Substeps CLI Runner and all dependencies required to run a basic Substeps project withWebDriver.</description>
+    <description>Substeps CLI Runner bundle with all dependencies required to run a basic Substeps project</description>
 
     <parent>
         <groupId>co.uk.baconi.substeps</groupId>
@@ -33,7 +33,7 @@
     </parent>
 
     <properties>
-        <releaseVersion>0.0.1</releaseVersion>
+        <releaseVersion>0.0.2</releaseVersion>
 
         <chrome.driver.version>2.19</chrome.driver.version>
 
