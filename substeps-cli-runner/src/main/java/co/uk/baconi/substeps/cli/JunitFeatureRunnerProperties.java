@@ -26,66 +26,150 @@ import java.util.List;
 
 public enum JunitFeatureRunnerProperties {
 
-    ; // No Instances
+    PROPERTIES; // uninstantiable
+
 
     /**
-     * All properties under "co.uk.baconi.substeps.cli"
+     * All properties under "co.uk.baconi.substeps", including environment specific if available.
      */
-    public static final Config PROPERTIES = ConfigFactory.load().getConfig("co.uk.baconi.substeps.cli");
+    private final Config properties;
 
     /**
      * Directory containing your features.
      */
-    public static final String FEATURE_DIRECTORY = PROPERTIES.getString("featuresDirectory");
+    private final String featuresDirectory;
 
     /**
      * Directory containing your substeps.
      */
-    public static final String SUBSTEPS_DIRECTORY = PROPERTIES.getString("substepsDirectory");
+    private final String substepsDirectory;
 
     /**
      * List of the tags required of a feature to run them
      */
-    public static final List<String> TAGS = PROPERTIES.getStringList("tags");
+    private final List<String> tags;
 
     /**
      * TODO: Determin what this property actually do.
      */
-    public static final boolean STRICT = PROPERTIES.getBoolean("strict");
+    private final boolean strict;
 
     /**
      * TODO: Determin what this property actually do.
      */
-    public static final List<String> NON_STRICT_KEYWORD_PRECEDENCE = PROPERTIES.getStringList("nonStrictKeywordPrecedence");
+    private final List<String> nonStrictKeywordPrecedence;
 
     /**
      * The Description Provider. - TODO: Determin what that actaully means.
      */
-    public static final String DESCRIPTION_PROVIDER = PROPERTIES.getString("descriptionProvider");
+    private final String descriptionProvider;
 
     /**
      * List of SubStep Implementations, classes that implement annotations in: {@link com.technophobia.substeps.model.SubSteps}
      */
-    public static final List<String> SETP_IMPLS = PROPERTIES.getStringList("implementations.steps");
+    private final List<String> stepImplementations;
 
     /**
      * List of Before And After Implementations, classes that implement annotations in: {@link com.technophobia.substeps.runner.setupteardown.Annotations}
      */
-    public static final List<String> BEFORE_AND_AFTER = PROPERTIES.getStringList("implementations.beforeAndAfter");
+    private final List<String> beforeAndAfter;
 
     /**
      * Enables the running of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final boolean REPORT_ENABLED = PROPERTIES.getBoolean("report.enabled");
+    private final boolean reportEnabled;
 
     /**
      * Implementation of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final String REPORT_BUILDER = PROPERTIES.getString("report.builder");
+    private final String reportBuilder;
 
     /**
      * Directory to place the output of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    public static final String REPORT_OUTPUT_LOCATION = PROPERTIES.getString("report.outputLocation");
+    private final String reportOutputLocation;
+
+    JunitFeatureRunnerProperties() {
+
+        //
+        // All properties under "co.uk.baconi.substeps", including environment specific if available.
+        //
+        final String propertyBase = "co.uk.baconi.substeps.cli";
+        final String environmentProperty = "environment";
+        final Config systemProperties = ConfigFactory.systemProperties();
+        if (systemProperties.hasPath(environmentProperty)) {
+            final String environment = systemProperties.getString(environmentProperty);
+            // Load properties using ${environment}.conf falling back on the normal Typesafe Config structure.
+            properties = ConfigFactory.
+                    parseResourcesAnySyntax(environment).
+                    withFallback(ConfigFactory.load()).
+                    getConfig(propertyBase);
+        } else {
+            // Load properties without environment specific configuration.
+            properties = ConfigFactory.
+                    load().
+                    getConfig(propertyBase);
+        }
+
+        this.featuresDirectory = properties.getString("featuresDirectory");
+        this.substepsDirectory = properties.getString("substepsDirectory");
+        this.tags = properties.getStringList("tags");
+        this.strict = properties.getBoolean("strict");
+        this.nonStrictKeywordPrecedence = properties.getStringList("nonStrictKeywordPrecedence");
+        this.descriptionProvider = properties.getString("descriptionProvider");
+        this.stepImplementations = properties.getStringList("implementations.steps");
+        this.beforeAndAfter = properties.getStringList("implementations.beforeAndAfter");
+        this.reportEnabled = properties.getBoolean("report.enabled");
+        this.reportBuilder = properties.getString("report.builder");
+        this.reportOutputLocation = properties.getString("report.outputLocation");
+    }
+
+    public Config getProperties() {
+        return properties;
+    }
+
+    public String getFeaturesDirectory() {
+        return featuresDirectory;
+    }
+
+    public String getSubstepsDirectory() {
+        return substepsDirectory;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public boolean isStrict() {
+        return strict;
+    }
+
+    public List<String> getNonStrictKeywordPrecedence() {
+        return nonStrictKeywordPrecedence;
+    }
+
+    public String getDescriptionProvider() {
+        return descriptionProvider;
+    }
+
+    public List<String> getStepImplementations() {
+        return stepImplementations;
+    }
+
+    public List<String> getBeforeAndAfter() {
+        return beforeAndAfter;
+    }
+
+    public boolean isReportEnabled() {
+        return reportEnabled;
+    }
+
+    public String getReportBuilder() {
+        return reportBuilder;
+    }
+
+    public String getReportOutputLocation() {
+        return reportOutputLocation;
+    }
 
 }

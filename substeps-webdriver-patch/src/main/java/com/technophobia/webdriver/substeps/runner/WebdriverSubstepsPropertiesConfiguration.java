@@ -18,23 +18,17 @@
  */
 package com.technophobia.webdriver.substeps.runner;
 
-import java.io.File;
-import java.net.URL;
-
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.technophobia.substeps.model.Configuration;
+import java.io.File;
 
 public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstepsConfiguration {
 
     INSTANCE; // uninstantiable
-
-    private final Logger logger = LoggerFactory.getLogger(WebdriverSubstepsPropertiesConfiguration.class);
 
     /**
      * URL base for all substep actions. [file:///]
@@ -94,12 +88,30 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
 
     WebdriverSubstepsPropertiesConfiguration() {
 
+        final Logger logger = LoggerFactory.getLogger(WebdriverSubstepsPropertiesConfiguration.class);
         logger.info("Using Typesafe Config version of WebdriverSubstepsPropertiesConfiguration!");
 
         //
-        // Load all properties under [co.uk.baconi.substeps.driver]
+        // Load all properties under [co.uk.baconi.substeps.driver], including environment specific if available.
         //
-        final Config properties = ConfigFactory.load().getConfig("co.uk.baconi.substeps.driver");
+        final String environmentProperty = "environment";
+        final String propertyBase = "co.uk.baconi.substeps.driver";
+        final Config systemProperties = ConfigFactory.systemProperties();
+
+        final Config properties;
+        if (systemProperties.hasPath(environmentProperty)) {
+            final String environment = systemProperties.getString(environmentProperty);
+            // Load properties using ${environment}.conf falling back on the normal Typesafe Config structure.
+            properties = ConfigFactory.
+                    parseResourcesAnySyntax(environment).
+                    withFallback(ConfigFactory.load()).
+                    getConfig(propertyBase);
+        } else {
+            // Load properties without environment specific configuration.
+            properties = ConfigFactory.
+                    load().
+                    getConfig(propertyBase);
+        }
 
         //
         // Basic Properties
@@ -114,7 +126,7 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
             webdriverFactoryClass = Class.forName(webdriverFactoryClassName).asSubclass(WebDriverFactory.class);
         } catch (final ClassNotFoundException ex) {
             throw new IllegalStateException(
-                "'co.uk.baconi.substeps.driver.factory' is invalid with value '" + webdriverFactoryClassName + "'", ex
+                    "'co.uk.baconi.substeps.driver.factory' is invalid with value '" + webdriverFactoryClassName + "'", ex
             );
         }
 
@@ -136,56 +148,67 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
     }
 
 
+    @Override
     public String baseURL() {
         return baseUrl;
     }
 
 
+    @Override
     public DefaultDriverType driverType() {
         return driverType;
     }
 
 
+    @Override
     public String driverLocale() {
         return driverLocale;
     }
 
 
+    @Override
     public boolean shutDownWebdriver() {
         return shutdownWebdriver;
     }
 
 
+    @Override
     public boolean isJavascriptDisabledWithHTMLUnit() {
         return htmlunitDisableJs;
     }
 
 
+    @Override
     public boolean closeVisualWebDriveronFail() {
         return visualWebdriverCloseOnFail;
     }
 
 
+    @Override
     public boolean reuseWebDriver() {
         return reuseWebdriver;
     }
 
 
+    @Override
     public long defaultTimeout() {
         return defaultWebDriverTimeoutSecs;
     }
 
 
+    @Override
     public String getHtmlUnitProxyHost() {
         return htmlUnitProxyHost;
     }
 
 
+    @Override
     public Integer getHtmlUnitProxyPort() {
         return htmlUnitProxyPort;
     }
 
 
+    @Override
     public Class<? extends WebDriverFactory> getWebDriverFactoryClass() {
         return webdriverFactoryClass;
     }
@@ -199,7 +222,7 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
         if (!property.startsWith("http") && !property.startsWith("file://")) {
 
             resolvedBaseUrl = removeTrailingSlash(new File(property).toURI()
-                .toString());
+                    .toString());
         } else {
             resolvedBaseUrl = property;
         }

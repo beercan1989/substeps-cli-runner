@@ -24,18 +24,18 @@ import com.technophobia.substeps.execution.node.RootNode;
 import com.technophobia.substeps.report.ExecutionReportBuilder;
 import com.technophobia.substeps.runner.DescriptionProvider;
 import com.technophobia.substeps.runner.JunitFeatureRunner;
+import com.typesafe.config.ConfigRenderOptions;
 import org.junit.Assert;
 import org.junit.runner.notification.RunNotifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static co.uk.baconi.substeps.cli.JunitFeatureRunnerProperties.PROPERTIES;
 
 /**
  * Purpose is to provide the ability to run as JUnit but configure using a properties file instead of annotations.
@@ -53,13 +53,13 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
 
         LOG.debug("JunitFeatureRunnerUsingProperties with class: " + classContainingTheTests.getSimpleName());
 
-        LOG.trace("Running with properties: " + JunitFeatureRunnerProperties.PROPERTIES);
+        LOG.trace("Running with properties: " + PROPERTIES.getProperties().root().render(ConfigRenderOptions.concise().setFormatted(true)));
 
         //
         // Step Implementations
         //
         final List<Class<?>> stepImplementations = new ArrayList<Class<?>>();
-        for (final String step : JunitFeatureRunnerProperties.SETP_IMPLS) {
+        for (final String step : PROPERTIES.getStepImplementations()) {
             try {
                 final Class<?> stepImpl = Class.forName(step);
                 stepImplementations.add(stepImpl);
@@ -72,19 +72,19 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
         //
         // Feature and Substeps directories
         //
-        final String featuresDirectory = JunitFeatureRunnerProperties.FEATURE_DIRECTORY;
-        final String substepsDirectory = JunitFeatureRunnerProperties.SUBSTEPS_DIRECTORY;
+        final String featuresDirectory = PROPERTIES.getFeaturesDirectory();
+        final String substepsDirectory = PROPERTIES.getSubstepsDirectory();
 
         //
         // Tags
         //
         final StringBuilder tagList = new StringBuilder();
-        for (final String tag : JunitFeatureRunnerProperties.TAGS) {
+        for (final String tag : PROPERTIES.getTags()) {
             tagList.append(tag.trim());
             tagList.append(" ");
         }
         final int lastIndexOfSpace = tagList.lastIndexOf(" ");
-        if(lastIndexOfSpace >= 0) {
+        if (lastIndexOfSpace >= 0) {
             tagList.deleteCharAt(lastIndexOfSpace);
         }
 
@@ -92,24 +92,24 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
         //
         // Strict
         //
-        final boolean strict = JunitFeatureRunnerProperties.STRICT;
+        final boolean strict = PROPERTIES.isStrict();
 
         //
         // Non Strict Keyword Precedence
         //
-        final List<String> nonStrictKeywordPrecedence = JunitFeatureRunnerProperties.NON_STRICT_KEYWORD_PRECEDENCE;
+        final List<String> nonStrictKeywordPrecedence = PROPERTIES.getNonStrictKeywordPrecedence();
 
         //
         // Description Provider
         //
-        final String descriptionProvider = JunitFeatureRunnerProperties.DESCRIPTION_PROVIDER;
+        final String descriptionProvider = PROPERTIES.getDescriptionProvider();
         final Class<? extends DescriptionProvider> descriptionProviderImpl = getImpl(descriptionProvider, DescriptionProvider.class);
 
         //
         // Before and After Implementations
         //
         final List<Class<?>> beforeAndAfterImplementations = new ArrayList<Class<?>>();
-        for (final String beforeAndAfter : JunitFeatureRunnerProperties.BEFORE_AND_AFTER) {
+        for (final String beforeAndAfter : PROPERTIES.getBeforeAndAfter()) {
             try {
                 final Class<?> beforeAndAfterImplementation = Class.forName(beforeAndAfter);
                 beforeAndAfterImplementations.add(beforeAndAfterImplementation);
@@ -137,12 +137,12 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
         //
         // Report Builder
         //
-        if(JunitFeatureRunnerProperties.REPORT_ENABLED) {
-            final String reportBuilderProperty = JunitFeatureRunnerProperties.REPORT_BUILDER;
+        if (PROPERTIES.isReportEnabled()) {
+            final String reportBuilderProperty = PROPERTIES.getReportBuilder();
             final Class<? extends ExecutionReportBuilder> reportBuilderImpl = getImpl(reportBuilderProperty, ExecutionReportBuilder.class);
             try {
                 reportBuilder = reportBuilderImpl.newInstance();
-                reportBuilder.setOutputDirectory(new File(JunitFeatureRunnerProperties.REPORT_OUTPUT_LOCATION));
+                reportBuilder.setOutputDirectory(new File(PROPERTIES.getReportOutputLocation()));
             } catch (final InstantiationException e) {
                 LOG.error("Exception", e);
                 Assert.fail("failed to instantiate report builder: " + reportBuilderImpl.getName() + ":" + e.getMessage());
@@ -168,7 +168,7 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
         super.run(junitNotifier);
 
         // Build report
-        if(reportBuilder != null) {
+        if (reportBuilder != null) {
             reportBuilder.addRootExecutionNode(rootNode);
             reportBuilder.buildReport();
         }
