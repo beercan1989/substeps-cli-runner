@@ -17,12 +17,16 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>substeps-cli-runner-bundle</artifactId>
     <packaging>pom</packaging>
     <name>SubSteps CLI Runner Bundle</name>
+    <description>A bundle of the Substeps CLI Runner and all dependencies required to run a basic Substeps project with
+        WebDriver.
+    </description>
 
     <parent>
         <groupId>co.uk.baconi.substeps</groupId>
@@ -31,7 +35,7 @@
     </parent>
 
     <properties>
-        <bundled.version>0.0.1</bundled.version>
+        <releaseVersion>0.0.1</releaseVersion>
 
         <chrome.driver.version>2.19</chrome.driver.version>
 
@@ -131,52 +135,80 @@
                         <configuration>
                             <target>
                                 <!-- Make sure the drivers directory exists -->
-                                <mkdir dir="${project.build.directory}/drivers" />
+                                <mkdir dir="${project.build.directory}/drivers"/>
 
                                 <!-- Chrome Driver-->
-                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_release-notes.txt" verbose="true" usetimestamp="true">
-                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/notes.txt" />
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_release-notes.txt"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/notes.txt"/>
                                 </get>
-                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip" verbose="true" usetimestamp="true">
-                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_win32.zip" />
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_win32.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip" dest="${project.build.directory}/drivers/win32">
-                                    <patternset><include name="chromedriver.exe" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip"
+                                       dest="${project.build.directory}/drivers/win32">
+                                    <patternset>
+                                        <include name="chromedriver.exe"/>
+                                    </patternset>
                                 </unzip>
-                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip" dest="${project.build.directory}/drivers/win64">
-                                    <patternset><include name="chromedriver.exe" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip"
+                                       dest="${project.build.directory}/drivers/win64">
+                                    <patternset>
+                                        <include name="chromedriver.exe"/>
+                                    </patternset>
                                 </unzip>
-                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip" verbose="true" usetimestamp="true">
-                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_mac32.zip" />
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_mac32.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip" dest="${project.build.directory}/drivers/mac32">
-                                    <patternset><include name="chromedriver" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip"
+                                       dest="${project.build.directory}/drivers/mac32">
+                                    <patternset>
+                                        <include name="chromedriver"/>
+                                    </patternset>
                                 </unzip>
-                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip" verbose="true" usetimestamp="true">
-                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux32.zip" />
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux32.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip" dest="${project.build.directory}/drivers/linux32">
-                                    <patternset><include name="chromedriver" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip"
+                                       dest="${project.build.directory}/drivers/linux32">
+                                    <patternset>
+                                        <include name="chromedriver"/>
+                                    </patternset>
                                 </unzip>
-                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip" verbose="true" usetimestamp="true">
-                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux64.zip" />
+                                <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux64.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip" dest="${project.build.directory}/drivers/linux64">
-                                    <patternset><include name="chromedriver" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip"
+                                       dest="${project.build.directory}/drivers/linux64">
+                                    <patternset>
+                                        <include name="chromedriver"/>
+                                    </patternset>
                                 </unzip>
 
                                 <!-- IE Driver-->
-                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip" verbose="true" usetimestamp="true">
-                                    <url url="https://selenium-release.storage.googleapis.com/${ie.driver.version}/IEDriverServer_Win32_${ie.driver.version}.0.zip" />
+                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="https://selenium-release.storage.googleapis.com/${ie.driver.version}/IEDriverServer_Win32_${ie.driver.version}.0.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip" dest="${project.build.directory}/drivers/win32">
-                                    <patternset><include name="IEDriverServer.exe" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win32.zip"
+                                       dest="${project.build.directory}/drivers/win32">
+                                    <patternset>
+                                        <include name="IEDriverServer.exe"/>
+                                    </patternset>
                                 </unzip>
-                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip" verbose="true" usetimestamp="true">
-                                    <url url="http://selenium-release.storage.googleapis.com/2.41/IEDriverServer_x64_${ie.driver.version}.0.zip" />
+                                <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip"
+                                     verbose="true" usetimestamp="true">
+                                    <url url="http://selenium-release.storage.googleapis.com/2.41/IEDriverServer_x64_${ie.driver.version}.0.zip"/>
                                 </get>
-                                <unzip src="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip" dest="${project.build.directory}/drivers/win64">
-                                    <patternset><include name="IEDriverServer.exe" /></patternset>
+                                <unzip src="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip"
+                                       dest="${project.build.directory}/drivers/win64">
+                                    <patternset>
+                                        <include name="IEDriverServer.exe"/>
+                                    </patternset>
                                 </unzip>
                             </target>
                         </configuration>
@@ -204,18 +236,18 @@
                                 <mainClass>co.uk.baconi.substeps.cli.SubstepsCommandLineRunner</mainClass>
                                 <addDependencies>true</addDependencies>
                                 <jarLocation>lib/</jarLocation>
-                                <preCp>properties/application.conf;</preCp>
+                                <preCp>properties/*;</preCp>
                             </classPath>
                             <jre>
                                 <minVersion>1.6.0</minVersion>
                             </jre>
                             <versionInfo>
-                                <fileVersion>0.${bundled.version}</fileVersion>
-                                <txtFileVersion>0.${bundled.version}</txtFileVersion>
+                                <fileVersion>0.${releaseVersion}</fileVersion>
+                                <txtFileVersion>0.${releaseVersion}</txtFileVersion>
                                 <fileDescription>${project.description}</fileDescription>
                                 <copyright>2015 James Bacon</copyright>
-                                <productVersion>0.${bundled.version}</productVersion>
-                                <txtProductVersion>0.${bundled.version}</txtProductVersion>
+                                <productVersion>0.${releaseVersion}</productVersion>
+                                <txtProductVersion>0.${releaseVersion}</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <internalName>${project.artifactId}</internalName>
                                 <originalFilename>substeps.exe</originalFilename>
