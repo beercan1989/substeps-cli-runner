@@ -3,7 +3,7 @@ Project to provide useful features and make it easier to get started with Subste
 + Substeps Site: https://substeps.g2g3.digital
 + GitHub Account: https://github.com/G2G3Digital
 
-## Up coming features, may or may not be included in 0.0.2
+## Possible up coming features in 0.0.2
 + A single common property file for both configuring Substeps and WebDriver.
 + Better comments / explanations of what the properties do.
 + JUnit XML report.
