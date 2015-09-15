@@ -23,10 +23,9 @@
 
     <artifactId>substeps-cli-runner-bundle</artifactId>
     <packaging>pom</packaging>
+
     <name>SubSteps CLI Runner Bundle</name>
-    <description>A bundle of the Substeps CLI Runner and all dependencies required to run a basic Substeps project with
-        WebDriver.
-    </description>
+    <description>A bundle of the Substeps CLI Runner and all dependencies required to run a basic Substeps project withWebDriver.</description>
 
     <parent>
         <groupId>co.uk.baconi.substeps</groupId>
@@ -57,8 +56,8 @@
             <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>com.technophobia.substeps</groupId>
-            <artifactId>webdriver-substeps</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>substeps-webdriver-proxy</artifactId>
         </dependency>
 
         <!-- TODO Include: Rest Driver Substeps? -->
