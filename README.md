@@ -5,6 +5,7 @@ Project to provide useful features and make it easier to get started with Subste
 
 ## Possible up coming features in 0.0.2
 + A single common property file for both configuring Substeps and WebDriver.
++ Means of overriding any property per "environment".
 + Better comments / explanations of what the properties do.
 + JUnit XML report.
 + Glossary Builder, provides a HTML report of all the known step implementations, including any included libraries.
