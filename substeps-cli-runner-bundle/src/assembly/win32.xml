@@ -37,7 +37,6 @@
             <directory>${project.basedir}/src/bin</directory>
             <outputDirectory></outputDirectory>
             <includes>
-                <include>*.bat</include>
                 <include>*.cmd</include>
             </includes>
             <lineEnding>dos</lineEnding>
