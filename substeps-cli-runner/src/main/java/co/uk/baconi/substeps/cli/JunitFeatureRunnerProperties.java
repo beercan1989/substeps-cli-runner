@@ -94,7 +94,7 @@ public enum JunitFeatureRunnerProperties {
         //
         // All properties under "co.uk.baconi.substeps", including environment specific if available.
         //
-        final String propertyBase = "co.uk.baconi.substeps.cli";
+        final String propertyBase = "substeps.cli";
         final String environmentProperty = "environment";
         final Config systemProperties = ConfigFactory.systemProperties();
         if (systemProperties.hasPath(environmentProperty)) {
