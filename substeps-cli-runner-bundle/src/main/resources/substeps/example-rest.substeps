@@ -1,0 +1,17 @@
+Define: Given I am creating an API call to a json test website to validate some json
+    NewRestRequest as 'GET' to 'http://validate.jsontest.com?json=%7B%22key%22%3A%22value%22%7D'
+
+Define: Then I execute the API call
+    ExecuteRestRequest with available configuration
+
+Define: And I get a successful response
+	AssertRestResponse has code '200'
+
+Define: Containing a valid JSON object
+    AssertRestResponseBody is JSON 'object'
+
+Define: Containing a valid validation result
+    AssertJsonElement ByJsonPath '$.object_or_array' in RestResponseBody a 'string' with value: object
+    AssertJsonElement ByJsonPath '$.empty' in RestResponseBody a 'boolean' with value: false
+    AssertJsonElement ByJsonPath '$.validate' in RestResponseBody a 'boolean' with value: true
+    AssertJsonElement ByJsonPath '$.size' in RestResponseBody a 'number' with value: 1

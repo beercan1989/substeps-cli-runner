@@ -29,6 +29,9 @@
     <!-- Contains the JUnit running for the command line -->
     <logger name="co.uk.baconi.substeps.cli" level="debug"/>
 
+    <!-- This is useful, so we can actually see the errors when we cannot find step implementations. -->
+    <logger name="com.technophobia.substeps.runner.builder" level="debug"/>
+
     <root level="info">
         <appender-ref ref="CONSOLE" />
     </root>
