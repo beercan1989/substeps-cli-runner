@@ -49,6 +49,10 @@
         </dependency>
 
         <!-- Substeps -->
+        <dependency><!-- TODO - Remove once we've managed to get Substeps to use Typesafe Config -->
+            <groupId>${project.groupId}</groupId>
+            <artifactId>webdriver-substeps-patch</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-bom</artifactId>
@@ -56,10 +60,8 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>substeps-webdriver-proxy</artifactId>
+            <artifactId>restdriver-substeps</artifactId>
         </dependency>
-
-        <!-- TODO Include: Rest Driver Substeps? -->
 
         <!-- Logger -->
         <dependency>
@@ -94,6 +96,29 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin> <!-- TODO - Remove once we've managed to get Substeps to use Typesafe Config -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>truezip-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>remove-a-file-in-sub-archive</id>
+                        <goals>
+                            <goal>remove</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <fileset>
+                                <directory>${project.build.outputDirectory}/lib/webdriver-substeps-${substeps.version}.jar/com/technophobia/webdriver/substeps/runner</directory>
+                                <includes>
+                                    <include>WebdriverSubstepsPropertiesConfiguration.class</include>
+                                </includes>
+                            </fileset>
+                            <verbose>true</verbose>
                         </configuration>
                     </execution>
                 </executions>

@@ -95,7 +95,7 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
         // Load all properties under [co.uk.baconi.substeps.driver], including environment specific if available.
         //
         final String environmentProperty = "environment";
-        final String propertyBase = "co.uk.baconi.substeps.driver";
+        final String propertyBase = "substeps.driver";
         final Config systemProperties = ConfigFactory.systemProperties();
 
         final Config properties;
@@ -117,32 +117,32 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
         // Basic Properties
         //
         baseUrl = determineBaseURL(properties.getString("baseUrl"));
-        driverType = DefaultDriverType.valueOf(properties.getString("driverType").toUpperCase());
-        defaultWebDriverTimeoutSecs = properties.getInt("timeoutInSeconds");
-        driverLocale = properties.getString("locale");
+        driverType = DefaultDriverType.valueOf(properties.getString("webdriver.driverType").toUpperCase());
+        defaultWebDriverTimeoutSecs = properties.getInt("webdriver.timeoutInSeconds");
+        driverLocale = properties.getString("webdriver.locale");
 
-        final String webdriverFactoryClassName = properties.getString("factory");
+        final String webdriverFactoryClassName = properties.getString("webdriver.factory");
         try {
             webdriverFactoryClass = Class.forName(webdriverFactoryClassName).asSubclass(WebDriverFactory.class);
         } catch (final ClassNotFoundException ex) {
             throw new IllegalStateException(
-                    "'co.uk.baconi.substeps.driver.factory' is invalid with value '" + webdriverFactoryClassName + "'", ex
+                    "'substeps.driver.factory' is invalid with value '" + webdriverFactoryClassName + "'", ex
             );
         }
 
         //
         // Visual Specific Properties
         //
-        visualWebdriverCloseOnFail = properties.getBoolean("visual.closeOnFail");
-        shutdownWebdriver = properties.getBoolean("visual.shutdown");
-        reuseWebdriver = properties.getBoolean("visual.reuse");
+        visualWebdriverCloseOnFail = properties.getBoolean("webdriver.visual.closeOnFail");
+        shutdownWebdriver = properties.getBoolean("webdriver.visual.shutdown");
+        reuseWebdriver = properties.getBoolean("webdriver.visual.reuse");
 
         //
         // HtmlUnit Specific Properties
         //
-        htmlunitDisableJs = properties.getBoolean("htmlunit.disableJavascript");
-        htmlUnitProxyHost = properties.getString("htmlunit.proxy.host");
-        htmlUnitProxyPort = properties.getInt("htmlunit.proxy.port");
+        htmlunitDisableJs = properties.getBoolean("webdriver.htmlunit.disableJavascript");
+        htmlUnitProxyHost = properties.getString("webdriver.htmlunit.proxy.host");
+        htmlUnitProxyPort = properties.getInt("webdriver.htmlunit.proxy.port");
 
         logger.info("Using properties: " + properties.root().render(ConfigRenderOptions.concise().setFormatted(true)));
     }

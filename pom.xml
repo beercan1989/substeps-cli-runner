@@ -59,7 +59,6 @@
         <module>substeps-cli-runner</module>
         <module>substeps-restdriver</module>
         <module>substeps-webdriver-patch</module>
-        <module>substeps-webdriver-proxy</module>
         <module>substeps-cli-runner-bundle</module>
     </modules>
 
@@ -73,6 +72,7 @@
 
         <surefire.version>2.18.1</surefire.version>
 
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -86,18 +86,13 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>substeps-restdriver</artifactId>
+                <artifactId>webdriver-substeps-patch</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>restdriver-substeps</artifactId>
                 <version>${substeps.restdriver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>substeps-webdriver-patch</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>substeps-webdriver-proxy</artifactId>
-                <version>${project.version}</version>
             </dependency>
 
             <!-- Properties-->
@@ -168,8 +163,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.3</version>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
