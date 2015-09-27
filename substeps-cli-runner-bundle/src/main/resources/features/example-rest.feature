@@ -1,4 +1,4 @@
-Tags: @non-visual
+Tags: @all @example-rest
 
 Feature: A feature to test posting data to a json rest end point
 

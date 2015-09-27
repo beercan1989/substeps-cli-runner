@@ -32,6 +32,9 @@
     <!-- This is useful, so we can actually see the errors when we cannot find step implementations. -->
     <logger name="com.technophobia.substeps.runner.builder" level="debug"/>
 
+    <!-- This is useful, so we can actually see the errors when we cannot find browser drivers on the classpath. -->
+    <logger name="com.technophobia.substeps.runner.node.AbstractNodeRunner" level="debug"/>
+
     <root level="info">
         <appender-ref ref="CONSOLE" />
     </root>
