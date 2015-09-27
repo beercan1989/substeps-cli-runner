@@ -43,6 +43,11 @@
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
+            <directory>${project.build.outputDirectory}/glossary</directory>
+            <outputDirectory>glossary</outputDirectory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
             <directory>${project.build.outputDirectory}/features</directory>
             <outputDirectory>features</outputDirectory>
             <lineEnding>unix</lineEnding>

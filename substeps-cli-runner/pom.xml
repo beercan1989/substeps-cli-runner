@@ -31,7 +31,6 @@
         <version>0.0.2-SNAPSHOT</version>
     </parent>
 
-
     <dependencies>
         <!-- Properties-->
         <dependency>
@@ -43,7 +42,6 @@
         <dependency>
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-junit-runner</artifactId>
-            <version>${substeps.version}</version>
         </dependency>
 
         <!-- Logging -->

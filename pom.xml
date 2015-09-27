@@ -78,7 +78,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Substeps -->
+            <!-- Custom Substeps -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>substeps-cli-runner</artifactId>
@@ -102,7 +102,7 @@
                 <version>${typesafe.config.version}</version>
             </dependency>
 
-            <!-- Substeps -->
+            <!-- Core Substeps -->
             <dependency>
                 <groupId>com.technophobia.substeps</groupId>
                 <artifactId>substeps-bom</artifactId>
@@ -117,6 +117,11 @@
             <dependency>
                 <groupId>com.technophobia.substeps</groupId>
                 <artifactId>webdriver-substeps</artifactId>
+                <version>${substeps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.technophobia.substeps</groupId>
+                <artifactId>substeps-glossary-builder</artifactId>
                 <version>${substeps.version}</version>
             </dependency>
 

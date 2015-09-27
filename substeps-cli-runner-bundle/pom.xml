@@ -48,6 +48,12 @@
             <artifactId>substeps-cli-runner</artifactId>
         </dependency>
 
+        <!-- RestDriver -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>restdriver-substeps</artifactId>
+        </dependency>
+
         <!-- Substeps -->
         <dependency><!-- TODO - Remove once we've managed to get Substeps to use Typesafe Config -->
             <groupId>${project.groupId}</groupId>
@@ -57,10 +63,6 @@
             <groupId>com.technophobia.substeps</groupId>
             <artifactId>substeps-bom</artifactId>
             <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>restdriver-substeps</artifactId>
         </dependency>
 
         <!-- Logger -->
@@ -141,6 +143,49 @@
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.technophobia.substeps</groupId>
+                <artifactId>substeps-glossary-builder</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>build-webdriver-substeps-glossary</id>
+                        <phase>process-classes</phase>
+
+                        <goals>
+                            <goal>generate-docs</goal>
+                        </goals>
+
+                        <configuration>
+                            <stepImplementationClassNames>
+                                <param>com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementations</param>
+                            </stepImplementationClassNames>
+
+                            <glossaryPublisher implementation="com.technophobia.substeps.glossary.HTMLSubstepsPublisher">
+                                <outputFile>${project.build.outputDirectory}/glossary/WebDriver_StepImplementations.html</outputFile>
+                            </glossaryPublisher>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-restdriver-substeps-glossary</id>
+                        <phase>process-classes</phase>
+
+                        <goals>
+                            <goal>generate-docs</goal>
+                        </goals>
+
+                        <configuration>
+                            <stepImplementationClassNames>
+                                <param>co.uk.baconi.substeps.restdriver.BaseRestDriverStepImplementations</param>
+                            </stepImplementationClassNames>
+
+                            <glossaryPublisher implementation="com.technophobia.substeps.glossary.HTMLSubstepsPublisher">
+                                <outputFile>${project.build.outputDirectory}/glossary/RestDriver_StepImplementations.html</outputFile>
+                            </glossaryPublisher>
                         </configuration>
                     </execution>
                 </executions>
