@@ -92,21 +92,29 @@ public enum WebdriverSubstepsPropertiesConfiguration implements WebdriverSubstep
         logger.info("Using Typesafe Config version of WebdriverSubstepsPropertiesConfiguration!");
 
         //
-        // Load all properties under [co.uk.baconi.substeps.driver], including environment specific if available.
+        // Load all properties under [substeps.driver], including environment specific if available.
         //
+        final Config properties;
+
         final String environmentProperty = "environment";
         final String propertyBase = "substeps.driver";
         final Config systemProperties = ConfigFactory.systemProperties();
 
-        final Config properties;
         if (systemProperties.hasPath(environmentProperty)) {
+
             final String environment = systemProperties.getString(environmentProperty);
+
+            logger.debug("Picking up custom property file for environment [" + environment + "]");
+
             // Load properties using ${environment}.conf falling back on the normal Typesafe Config structure.
             properties = ConfigFactory.
                     parseResourcesAnySyntax(environment).
                     withFallback(ConfigFactory.load()).
                     getConfig(propertyBase);
         } else {
+
+            logger.debug("No custom environment property file being used");
+
             // Load properties without environment specific configuration.
             properties = ConfigFactory.
                     load().

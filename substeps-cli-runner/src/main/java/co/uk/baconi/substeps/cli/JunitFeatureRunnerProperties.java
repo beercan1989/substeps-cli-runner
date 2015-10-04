@@ -21,6 +21,8 @@ package co.uk.baconi.substeps.cli;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public enum JunitFeatureRunnerProperties {
 
 
     /**
-     * All properties under "co.uk.baconi.substeps", including environment specific if available.
+     * All properties under "substeps.ci", including environment specific if available.
      */
     private final Config properties;
 
@@ -77,34 +79,54 @@ public enum JunitFeatureRunnerProperties {
     /**
      * Enables the running of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    private final boolean reportEnabled;
+    private final boolean substepsReportEnabled;
 
     /**
      * Implementation of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    private final String reportBuilder;
+    private final String substepsReportBuilder;
 
     /**
      * Directory to place the output of the {@link com.technophobia.substeps.report.ExecutionReportBuilder}
      */
-    private final String reportOutputLocation;
+    private final String substepsReportOutputLocation;
+
+    /**
+     * Enables the running of the JUnit XML report generator.
+     */
+    private final boolean junitReportEnabled;
+
+    /**
+     * File to place the output of the JUnit XML report generator.
+     */
+    private final String junitReportOutputLocation;
 
     JunitFeatureRunnerProperties() {
 
+        final Logger logger = LoggerFactory.getLogger(JunitFeatureRunnerProperties.class);
+
         //
-        // All properties under "co.uk.baconi.substeps", including environment specific if available.
+        // All properties under "substeps.cli", including environment specific if available.
         //
         final String propertyBase = "substeps.cli";
         final String environmentProperty = "environment";
         final Config systemProperties = ConfigFactory.systemProperties();
+
         if (systemProperties.hasPath(environmentProperty)) {
+
             final String environment = systemProperties.getString(environmentProperty);
+
+            logger.debug("Picking up custom property file for environment [" + environment + "]");
+
             // Load properties using ${environment}.conf falling back on the normal Typesafe Config structure.
             properties = ConfigFactory.
                     parseResourcesAnySyntax(environment).
                     withFallback(ConfigFactory.load()).
                     getConfig(propertyBase);
         } else {
+
+            logger.debug("No custom environment property file being used");
+
             // Load properties without environment specific configuration.
             properties = ConfigFactory.
                     load().
@@ -119,9 +141,11 @@ public enum JunitFeatureRunnerProperties {
         this.descriptionProvider = properties.getString("descriptionProvider");
         this.stepImplementations = properties.getStringList("implementations.steps");
         this.beforeAndAfter = properties.getStringList("implementations.beforeAndAfter");
-        this.reportEnabled = properties.getBoolean("report.enabled");
-        this.reportBuilder = properties.getString("report.builder");
-        this.reportOutputLocation = properties.getString("report.outputLocation");
+        this.substepsReportEnabled = properties.getBoolean("reports.substeps.enabled");
+        this.substepsReportBuilder = properties.getString("reports.substeps.builder");
+        this.substepsReportOutputLocation = properties.getString("reports.substeps.outputLocation");
+        this.junitReportEnabled = properties.getBoolean("reports.junit.enabled");
+        this.junitReportOutputLocation = properties.getString("reports.junit.outputLocation");
     }
 
     public Config getProperties() {
@@ -160,16 +184,23 @@ public enum JunitFeatureRunnerProperties {
         return beforeAndAfter;
     }
 
-    public boolean isReportEnabled() {
-        return reportEnabled;
+    public boolean isSubstepsReportEnabled() {
+        return substepsReportEnabled;
     }
 
-    public String getReportBuilder() {
-        return reportBuilder;
+    public String getSubstepsReportBuilder() {
+        return substepsReportBuilder;
     }
 
-    public String getReportOutputLocation() {
-        return reportOutputLocation;
+    public String getSubstepsReportOutputLocation() {
+        return substepsReportOutputLocation;
     }
 
+    public boolean isJunitReportEnabled() {
+        return junitReportEnabled;
+    }
+
+    public String getJunitReportOutputLocation() {
+        return junitReportOutputLocation;
+    }
 }

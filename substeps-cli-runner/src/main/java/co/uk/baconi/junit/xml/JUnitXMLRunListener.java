@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Prints XML output of the test to a specified Writer.
  */
 
-public class XmlRunListener extends RunListener {
+public class JUnitXMLRunListener extends RunListener {
 
     private static final double ONE_SECOND = 1000.0;
 
@@ -154,7 +154,7 @@ public class XmlRunListener extends RunListener {
 
     private Description lastDescription;
 
-    public XmlRunListener(final String filePath) {
+    public JUnitXMLRunListener(final String filePath) {
         if (filePath != null) {
             final File target = new File(filePath);
 
