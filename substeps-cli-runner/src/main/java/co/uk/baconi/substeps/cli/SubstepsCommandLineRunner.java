@@ -20,6 +20,7 @@
 package co.uk.baconi.substeps.cli;
 
 import co.uk.baconi.junit.BasicRunListener;
+import co.uk.baconi.junit.xml.JUnitXMLRunListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;
@@ -32,8 +33,11 @@ public class SubstepsCommandLineRunner {
         // Setup JUnit reporting.
         final JUnitCore jUnitCore = new JUnitCore();
 
-        // TODO - Find an implementation that doesn't break JUnit runs.
-        //jUnitCore.addListener(new XmlRunListener("reports/junit/junit_report.xml")); // TODO - Extract to a property
+        // Add a JUnit XML run listener to produce the xml report, if wanted.
+        if (JunitFeatureRunnerProperties.PROPERTIES.isJunitReportEnabled()) {
+            final String junitReportOutLocation = JunitFeatureRunnerProperties.PROPERTIES.getJunitReportOutputLocation();
+            jUnitCore.addListener(new JUnitXMLRunListener(junitReportOutLocation));
+        }
 
         // Add my basic run listener.
         jUnitCore.addListener(new BasicRunListener());

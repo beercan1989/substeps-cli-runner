@@ -137,12 +137,12 @@ public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {
         //
         // Report Builder
         //
-        if (PROPERTIES.isReportEnabled()) {
-            final String reportBuilderProperty = PROPERTIES.getReportBuilder();
+        if (PROPERTIES.isSubstepsReportEnabled()) {
+            final String reportBuilderProperty = PROPERTIES.getSubstepsReportBuilder();
             final Class<? extends ExecutionReportBuilder> reportBuilderImpl = getImpl(reportBuilderProperty, ExecutionReportBuilder.class);
             try {
                 reportBuilder = reportBuilderImpl.newInstance();
-                reportBuilder.setOutputDirectory(new File(PROPERTIES.getReportOutputLocation()));
+                reportBuilder.setOutputDirectory(new File(PROPERTIES.getSubstepsReportOutputLocation()));
             } catch (final InstantiationException e) {
                 LOG.error("Exception", e);
                 Assert.fail("failed to instantiate report builder: " + reportBuilderImpl.getName() + ":" + e.getMessage());
