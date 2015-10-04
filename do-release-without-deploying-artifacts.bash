@@ -49,7 +49,7 @@ echo "Next Version:    ${NEXT_SNAP_VERSION}"
 ## Compile and Install
 ## Commit Change and Tag
 ## Increment, add SNAPSHOT and Commit Change
-mvn --batch-mode release:prepare -Dtag="${RELEASE_VERSION}" -DreleaseVersion="${RELEASE_VERSION}" -DdevelopmentVersion="${NEXT_SNAP_VERSION}" -DautoVersionSubmodules=true 
+mvn --batch-mode release:prepare --projects '!substeps-restdriver' -Dtag="${RELEASE_VERSION}" -DreleaseVersion="${RELEASE_VERSION}" -DdevelopmentVersion="${NEXT_SNAP_VERSION}" -DautoVersionSubmodules=true
 
 ## Clean Up Local Repo
 find -type f -name '*.releaseBackup' | xargs -I {} rm -v {}
