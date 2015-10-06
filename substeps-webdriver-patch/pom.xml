@@ -25,7 +25,7 @@
     <name>Substeps WebDriver Patch</name>
 
     <parent>
-        <groupId>co.uk.baconi.substeps</groupId>
+        <groupId>uk.co.baconi.substeps</groupId>
         <artifactId>substeps-cli-runner-parent</artifactId>
         <version>0.0.2-SNAPSHOT</version>
     </parent>

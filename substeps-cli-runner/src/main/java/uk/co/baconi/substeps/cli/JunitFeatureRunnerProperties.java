@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package co.uk.baconi.substeps.cli;
+package uk.co.baconi.substeps.cli;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

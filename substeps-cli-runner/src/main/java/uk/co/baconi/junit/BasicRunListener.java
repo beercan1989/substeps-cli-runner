@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package co.uk.baconi.junit;
+package uk.co.baconi.junit;
 
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;

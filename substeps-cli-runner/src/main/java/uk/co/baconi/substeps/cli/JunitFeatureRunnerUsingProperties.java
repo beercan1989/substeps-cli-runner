@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package co.uk.baconi.substeps.cli;
+package uk.co.baconi.substeps.cli;
 
 import com.technophobia.substeps.execution.node.IExecutionNode;
 import com.technophobia.substeps.execution.node.RootNode;
@@ -35,11 +35,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static co.uk.baconi.substeps.cli.JunitFeatureRunnerProperties.PROPERTIES;
+import static uk.co.baconi.substeps.cli.JunitFeatureRunnerProperties.PROPERTIES;
 
 /**
  * Purpose is to provide the ability to run as JUnit but configure using a properties file instead of annotations.
- * <p/>
  * Created by JBacon on 13/09/2015.
  */
 public class JunitFeatureRunnerUsingProperties extends JunitFeatureRunner {

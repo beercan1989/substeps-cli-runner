@@ -27,7 +27,7 @@
     <description>Substeps CLI Runner bundle with all dependencies required to run a basic Substeps project</description>
 
     <parent>
-        <groupId>co.uk.baconi.substeps</groupId>
+        <groupId>uk.co.baconi.substeps</groupId>
         <artifactId>substeps-cli-runner-parent</artifactId>
         <version>0.0.2-SNAPSHOT</version>
     </parent>
@@ -180,7 +180,7 @@
 
                         <configuration>
                             <stepImplementationClassNames>
-                                <param>co.uk.baconi.substeps.restdriver.BaseRestDriverStepImplementations</param>
+                                <param>uk.co.baconi.substeps.restdriver.BaseRestDriverStepImplementations</param>
                             </stepImplementationClassNames>
 
                             <glossaryPublisher implementation="com.technophobia.substeps.glossary.HTMLSubstepsPublisher">
@@ -287,7 +287,7 @@
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>${project.name}</errTitle>
                             <classPath>
-                                <mainClass>co.uk.baconi.substeps.cli.SubstepsCommandLineRunner</mainClass>
+                                <mainClass>uk.co.baconi.substeps.cli.SubstepsCommandLineRunner</mainClass>
                                 <addDependencies>true</addDependencies>
                                 <jarLocation>lib/</jarLocation>
                                 <preCp>properties/*;</preCp>
@@ -322,6 +322,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
+                            <attach>false</attach>
                             <descriptors>
                                 <descriptor>src/assembly/mac32.xml</descriptor>
                                 <descriptor>src/assembly/win32.xml</descriptor>

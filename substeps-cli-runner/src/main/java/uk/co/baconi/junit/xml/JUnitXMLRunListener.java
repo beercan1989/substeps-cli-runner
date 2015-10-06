@@ -1,4 +1,4 @@
-package co.uk.baconi.junit.xml;
+package uk.co.baconi.junit.xml;
 
 import org.junit.runner.Description;
 import org.junit.runner.Result;

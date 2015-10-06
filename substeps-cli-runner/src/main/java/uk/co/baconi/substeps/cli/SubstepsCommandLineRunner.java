@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package co.uk.baconi.substeps.cli;
+package uk.co.baconi.substeps.cli;
 
-import co.uk.baconi.junit.BasicRunListener;
-import co.uk.baconi.junit.xml.JUnitXMLRunListener;
+import uk.co.baconi.junit.BasicRunListener;
+import uk.co.baconi.junit.xml.JUnitXMLRunListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;

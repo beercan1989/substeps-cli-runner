@@ -24,10 +24,10 @@
     </appender>
 
     <!-- Contains the JUnit reporting -->
-    <logger name="co.uk.baconi.junit" level="debug"/>
+    <logger name="uk.co.baconi.junit" level="debug"/>
 
     <!-- Contains the JUnit running for the command line -->
-    <logger name="co.uk.baconi.substeps.cli" level="debug"/>
+    <logger name="uk.co.baconi.substeps.cli" level="debug"/>
 
     <!-- This is useful, so we can actually see the errors when we cannot find step implementations. -->
     <logger name="com.technophobia.substeps.runner.builder" level="debug"/>

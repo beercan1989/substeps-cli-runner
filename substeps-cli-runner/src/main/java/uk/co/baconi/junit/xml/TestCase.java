@@ -1,7 +1,7 @@
-package co.uk.baconi.junit.xml;
+package uk.co.baconi.junit.xml;
 
-import co.uk.baconi.junit.xml.JUnitXMLRunListener.ITest;
-import co.uk.baconi.junit.xml.JUnitXMLRunListener.ResultEnum;
+import uk.co.baconi.junit.xml.JUnitXMLRunListener.ITest;
+import uk.co.baconi.junit.xml.JUnitXMLRunListener.ResultEnum;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.slf4j.Logger;
