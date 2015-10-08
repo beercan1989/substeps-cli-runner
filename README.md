@@ -12,7 +12,7 @@ Project to provide useful features and make it easier to get started with Subste
 + Feature requests.
 + Testing on Mac's, this is less likely due to availability of a Mac to test on.
 
-## Features coming in 0.0.2
+## Features in 0.0.2
 + A single common property file for both configuring Substeps and WebDriver.
     + application.conf is now the property file to rule them all, did a minor hack to alter how the webdriver properties are loaded.
 + Means of overriding any property per "environment".
