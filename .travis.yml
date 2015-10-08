@@ -6,7 +6,7 @@ jdk:
   - oraclejdk8
 
 install:
- - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --P skip-launch4j
+ - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -P skip-launch4j
 
 branches:
   only:
