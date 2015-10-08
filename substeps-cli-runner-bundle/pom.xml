@@ -336,4 +336,26 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>skip-launch4j</id> <!-- This is required for travis-ci as the plugin tries to do evil things. -->
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                            <artifactId>launch4j-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>create-exe-launcher</id>
+                                    <phase>none</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 </project>
