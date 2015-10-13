@@ -1,6 +1,6 @@
 # Substeps Command Line Runner [![Build Status](https://travis-ci.org/beercan1989/substeps-cli-runner.svg?branch=master)](https://travis-ci.org/beercan1989/substeps-cli-runner)
 Project to provide useful features and make it easier to get started with Substeps.
-+ Substeps Site: https://substeps.g2g3.digital
++ Substeps Site: http://substeps.g2g3.digital
 + GitHub Account: https://github.com/G2G3Digital
 
 ## Basic Requirements
