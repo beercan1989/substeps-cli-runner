@@ -54,6 +54,12 @@
             <artifactId>restdriver-substeps</artifactId>
         </dependency>
 
+        <!-- GhostDriver -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ghostdriver-substeps</artifactId>
+        </dependency>
+
         <!-- Substeps -->
         <dependency><!-- TODO - Remove once we've managed to get Substeps to use Typesafe Config -->
             <groupId>${project.groupId}</groupId>
@@ -209,6 +215,7 @@
                                 <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_release-notes.txt" verbose="true" usetimestamp="true">
                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/notes.txt" />
                                 </get>
+
                                 <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_win32.zip" verbose="true" usetimestamp="true">
                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_win32.zip" />
                                 </get>
@@ -222,6 +229,7 @@
                                         <include name="chromedriver.exe" />
                                     </patternset>
                                 </unzip>
+
                                 <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_mac32.zip" verbose="true" usetimestamp="true">
                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_mac32.zip" />
                                 </get>
@@ -230,6 +238,7 @@
                                         <include name="chromedriver" />
                                     </patternset>
                                 </unzip>
+
                                 <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux32.zip" verbose="true" usetimestamp="true">
                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux32.zip" />
                                 </get>
@@ -238,6 +247,7 @@
                                         <include name="chromedriver" />
                                     </patternset>
                                 </unzip>
+
                                 <get dest="${project.build.directory}/drivers/ChromeDriver_${chrome.driver.version}_linux64.zip" verbose="true" usetimestamp="true">
                                     <url url="https://chromedriver.storage.googleapis.com/${chrome.driver.version}/chromedriver_linux64.zip" />
                                 </get>
@@ -256,6 +266,7 @@
                                         <include name="IEDriverServer.exe" />
                                     </patternset>
                                 </unzip>
+
                                 <get dest="${project.build.directory}/drivers/IEDriver_${ie.driver.version}.0_win64.zip" verbose="true" usetimestamp="true">
                                     <url url="http://selenium-release.storage.googleapis.com/2.41/IEDriverServer_x64_${ie.driver.version}.0.zip" />
                                 </get>
@@ -263,6 +274,109 @@
                                     <patternset>
                                         <include name="IEDriverServer.exe" />
                                     </patternset>
+                                </unzip>
+
+                                <!-- PhantomJS -->
+                                <get dest="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-windows.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs.version}-windows.zip" />
+                                </get>
+                                <unzip src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-windows.zip" dest="${project.build.directory}/drivers/win32">
+                                    <patternset>
+                                        <include name="phantomjs-${phantomjs.version}-windows/phantomjs.exe" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*"/>
+                                    </mapper>
+                                </unzip>
+                                <unzip src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-windows.zip" dest="${project.build.directory}/drivers/win64">
+                                    <patternset>
+                                        <include name="phantomjs-${phantomjs.version}-windows/phantomjs.exe" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*"/>
+                                    </mapper>
+                                </unzip>
+
+                                <get dest="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-macosx.zip" verbose="true" usetimestamp="true">
+                                    <url url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs.version}-macosx.zip" />
+                                </get>
+                                <unzip src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-macosx.zip" dest="${project.build.directory}/drivers/mac32">
+                                    <patternset>
+                                        <include name="phantomjs-${phantomjs.version}-macosx/bin/phantomjs" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="phantomjs-${phantomjs.version}-macosx/bin/*" to="*"/>
+                                    </mapper>
+                                </unzip>
+                                <chmod file="${project.build.directory}/drivers/mac32/phantomjs" perm="u+x" />
+
+                                <get dest="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-linux-i686.tar.bz2" verbose="true" usetimestamp="true">
+                                    <url url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs.version}-linux-i686.tar.bz2" />
+                                </get>
+                                <untar src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-linux-i686.tar.bz2" dest="${project.build.directory}/drivers/linux32" compression="bzip2">
+                                    <patternset>
+                                        <include name="phantomjs-${phantomjs.version}-linux-i686/bin/phantomjs" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="phantomjs-${phantomjs.version}-linux-i686/bin/*" to="*"/>
+                                    </mapper>
+                                </untar>
+                                <chmod file="${project.build.directory}/drivers/linux32/phantomjs" perm="u+x" />
+
+                                <get dest="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-linux-x86_64.tar.bz2" verbose="true" usetimestamp="true">
+                                    <url url="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${phantomjs.version}-linux-x86_64.tar.bz2" />
+                                </get>
+                                <untar src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-linux-x86_64.tar.bz2" dest="${project.build.directory}/drivers/linux64" compression="bzip2">
+                                    <patternset>
+                                        <include name="phantomjs-${phantomjs.version}-linux-x86_64/bin/phantomjs" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="phantomjs-${phantomjs.version}-linux-x86_64/bin/*" to="*"/>
+                                    </mapper>
+                                </untar>
+                                <chmod file="${project.build.directory}/drivers/linux64/phantomjs" perm="u+x" />
+
+                                <!-- GhostDriver -->
+                                <get dest="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" src="https://github.com/detro/ghostdriver/archive/${ghostdriver.version}.zip" verbose="false" usetimestamp="true" />
+                                <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/win32/">
+                                    <patternset>
+                                        <include name="ghostdriver-${ghostdriver.version}/src/**" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                    </mapper>
+                                </unzip>
+                                <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/win64/">
+                                    <patternset>
+                                        <include name="ghostdriver-${ghostdriver.version}/src/**" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                    </mapper>
+                                </unzip>
+                                <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/mac32/">
+                                    <patternset>
+                                        <include name="ghostdriver-${ghostdriver.version}/src/**" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                    </mapper>
+                                </unzip>
+                                <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/linux32/">
+                                    <patternset>
+                                        <include name="ghostdriver-${ghostdriver.version}/src/**" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                    </mapper>
+                                </unzip>
+                                <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/linux64/">
+                                    <patternset>
+                                        <include name="ghostdriver-${ghostdriver.version}/src/**" />
+                                    </patternset>
+                                    <mapper>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                    </mapper>
                                 </unzip>
                             </target>
                         </configuration>
