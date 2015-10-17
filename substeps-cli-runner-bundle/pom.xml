@@ -29,7 +29,7 @@
     <parent>
         <groupId>uk.co.baconi.substeps</groupId>
         <artifactId>substeps-cli-runner-parent</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
     </parent>
 
     <properties>
@@ -285,7 +285,7 @@
                                         <include name="phantomjs-${phantomjs.version}-windows/phantomjs.exe" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*"/>
+                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*" />
                                     </mapper>
                                 </unzip>
                                 <unzip src="${project.build.directory}/drivers/phantomjs-${phantomjs.version}-windows.zip" dest="${project.build.directory}/drivers/win64">
@@ -293,7 +293,7 @@
                                         <include name="phantomjs-${phantomjs.version}-windows/phantomjs.exe" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*"/>
+                                        <globmapper from="phantomjs-${phantomjs.version}-windows/*" to="*" />
                                     </mapper>
                                 </unzip>
 
@@ -305,7 +305,7 @@
                                         <include name="phantomjs-${phantomjs.version}-macosx/bin/phantomjs" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="phantomjs-${phantomjs.version}-macosx/bin/*" to="*"/>
+                                        <globmapper from="phantomjs-${phantomjs.version}-macosx/bin/*" to="*" />
                                     </mapper>
                                 </unzip>
                                 <chmod file="${project.build.directory}/drivers/mac32/phantomjs" perm="u+x" />
@@ -318,7 +318,7 @@
                                         <include name="phantomjs-${phantomjs.version}-linux-i686/bin/phantomjs" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="phantomjs-${phantomjs.version}-linux-i686/bin/*" to="*"/>
+                                        <globmapper from="phantomjs-${phantomjs.version}-linux-i686/bin/*" to="*" />
                                     </mapper>
                                 </untar>
                                 <chmod file="${project.build.directory}/drivers/linux32/phantomjs" perm="u+x" />
@@ -331,7 +331,7 @@
                                         <include name="phantomjs-${phantomjs.version}-linux-x86_64/bin/phantomjs" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="phantomjs-${phantomjs.version}-linux-x86_64/bin/*" to="*"/>
+                                        <globmapper from="phantomjs-${phantomjs.version}-linux-x86_64/bin/*" to="*" />
                                     </mapper>
                                 </untar>
                                 <chmod file="${project.build.directory}/drivers/linux64/phantomjs" perm="u+x" />
@@ -343,7 +343,7 @@
                                         <include name="ghostdriver-${ghostdriver.version}/src/**" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*" />
                                     </mapper>
                                 </unzip>
                                 <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/win64/">
@@ -351,7 +351,7 @@
                                         <include name="ghostdriver-${ghostdriver.version}/src/**" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*" />
                                     </mapper>
                                 </unzip>
                                 <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/mac32/">
@@ -359,7 +359,7 @@
                                         <include name="ghostdriver-${ghostdriver.version}/src/**" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*" />
                                     </mapper>
                                 </unzip>
                                 <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/linux32/">
@@ -367,7 +367,7 @@
                                         <include name="ghostdriver-${ghostdriver.version}/src/**" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*" />
                                     </mapper>
                                 </unzip>
                                 <unzip src="${project.build.directory}/drivers/ghostdriver-${ghostdriver.version}.zip" dest="${project.build.directory}/drivers/linux64/">
@@ -375,7 +375,7 @@
                                         <include name="ghostdriver-${ghostdriver.version}/src/**" />
                                     </patternset>
                                     <mapper>
-                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*"/>
+                                        <globmapper from="ghostdriver-${ghostdriver.version}/src/*" to="ghostdriver/*" />
                                     </mapper>
                                 </unzip>
                             </target>
