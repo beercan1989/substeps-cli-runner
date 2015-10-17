@@ -8,6 +8,7 @@ Project to provide useful features and make it easier to get started with Subste
 + Java 8
 
 ## Possible up coming features in 0.0.3
++ PhantomJS integration via GhostDriver
 + Bug fixes.
 + Feature requests.
 + Testing on Mac's, this is less likely due to availability of a Mac to test on.

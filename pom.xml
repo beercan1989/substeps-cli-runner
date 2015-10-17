@@ -72,6 +72,7 @@
     <properties>
         <substeps.version>1.1.2</substeps.version>
         <substeps.restdriver.version>0.0.2</substeps.restdriver.version>
+        <substeps.ghostdriver.version>0.0.1</substeps.ghostdriver.version>
 
         <slf4j.version>1.7.12</slf4j.version>
         <logback.version>1.1.3</logback.version>
@@ -97,6 +98,11 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>restdriver-substeps</artifactId>
                 <version>${substeps.restdriver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>ghostdriver-substeps</artifactId>
+                <version>${substeps.ghostdriver.version}</version>
             </dependency>
 
             <!-- Properties-->
