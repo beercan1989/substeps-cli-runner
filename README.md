@@ -2,13 +2,10 @@
 Project to provide useful features and make it easier to get started with Substeps.
 + Substeps Site: https://substeps.g2g3.digital
 + Substeps Sources: https://github.com/G2G3Digital?utf8=%E2%9C%93&query=substeps
-
 + Chrome Driver: https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver
 + IE Driver: https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver
-
 + PhantomJS: https://github.com/ariya/phantomjs
 + GhostDriver: https://github.com/detro/ghostdriver
-
 + Substeps GhostDriver: https://github.com/beercan1989/substeps-ghostdriver
 + Substeps RestDriver: https://github.com/beercan1989/substeps-restdriver
 
