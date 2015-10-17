@@ -21,10 +21,6 @@ Project to provide useful features and make it easier to get started with Subste
 # Checkout code
 git clone https://github.com/beercan1989/substeps-cli-runner.git
 
-# Setup the submodules, currently only substeps-restdriver 
-git submodule init
-git submodule update
-
 # Build the project
 mvn clean package
 ```
